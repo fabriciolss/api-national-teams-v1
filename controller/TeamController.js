@@ -43,4 +43,11 @@ export class TeamController {
             .then(suc => res.status(204).json({message: "Successfully deleted."}) )
             .catch(err => res.status(500).json({message: `Bad Request: ${err.message}`}))
     }
+
+    static searchTeam = async(req, res) => {
+        TeamController.Teams.find({club: req.query.team})
+            .then(suc => res.status(200).json(suc))
+            .catch(err => res.status(500).json({message: `Bad Request: ${err.message}`}))
+            .catch(err => res.status(500).json({message: `Bad Request: ${err.message}`}))
+    }
 }

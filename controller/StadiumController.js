@@ -38,4 +38,10 @@ export class StadiumController {
             .then(suc => res.status(204).json({message: "Successfully deleted."}) )
             .catch(err => res.status(500).json({message: `Bad Request: ${err.message}`}))
     }
+
+    static searchStadium = async(req, res) => {
+        StadiumController.Stadiums.find({name: req.query.stadium})
+            .then(suc => res.status(200).json(suc))
+            .catch(err => res.status(500).json({message: `Bad Request: ${err.message}`}));
+    }
 }
