@@ -2,6 +2,7 @@ import { connectMongo } from "./server/db.js";
 import {TeamController} from './controller/TeamController.js';
 import {StadiumController} from './controller/StadiumController.js';
 import express from "express";
+import {Middlewares} from "./middlewares/middleware-api.js";
 const app = express();
 const port = 3000;
 app.use(express.json());
@@ -23,6 +24,8 @@ app.post('/stadiums/', StadiumController.createStadiums);
 app.put('/stadiums/:id', StadiumController.updateStadium);
 app.delete('/stadiums/:id', StadiumController.deleteStadium);
 
+app.use(Middlewares.notFounded);
+app.use(Middlewares.erroHandling);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 })
